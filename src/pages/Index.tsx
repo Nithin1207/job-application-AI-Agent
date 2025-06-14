@@ -1,65 +1,37 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Bot, 
-  Target, 
-  TrendingUp, 
-  Users, 
-  CheckCircle, 
-  XCircle, 
-  Lightbulb, 
-  Zap, 
-  Shield, 
-  Clock, 
-  BarChart3, 
-  Rocket,
-  Star,
-  ArrowRight,
-  ChevronDown,
-  User,
-  Calendar,
-  Eye
-} from 'lucide-react';
-
+import { Bot, Target, TrendingUp, Users, CheckCircle, XCircle, Lightbulb, Zap, Shield, Clock, BarChart3, Rocket, Star, ArrowRight, ChevronDown, User, Calendar, Eye } from 'lucide-react';
 const JobApplicationAgentsBlog = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [isVisible, setIsVisible] = useState({});
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({
-              ...prev,
-              [entry.target.id]: true
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(prev => ({
+            ...prev,
+            [entry.target.id]: true
+          }));
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    document.querySelectorAll('[data-animate]').forEach(el => {
       observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, []);
-
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ 
+  const scrollToSection = sectionId => {
+    document.getElementById(sectionId)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-700 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -84,19 +56,10 @@ const JobApplicationAgentsBlog = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in delay-700">
-              <Button 
-                size="lg" 
-                className="bg-white text-indigo-600 hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={() => scrollToSection('introduction')}
-              >
+              <Button size="lg" className="bg-white text-indigo-600 hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl" onClick={() => scrollToSection('introduction')}>
                 Start Reading <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transform hover:scale-105 transition-all duration-300"
-                onClick={() => scrollToSection('table-of-contents')}
-              >
+              <Button variant="outline" size="lg" onClick={() => scrollToSection('table-of-contents')} className="border-white/30 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 text-blue-800 bg-purple-300 hover:bg-purple-200">
                 View Contents
               </Button>
             </div>
@@ -116,7 +79,7 @@ const JobApplicationAgentsBlog = () => {
         
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1200 120" fill="none" className="w-full h-auto">
-            <path d="M0,96L48,80C96,64,192,32,288,37.3C384,43,480,85,576,96C672,107,768,85,864,69.3C960,53,1056,43,1152,48L1200,53V120H1152C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120H0V96Z" fill="currentColor" className="text-slate-50"/>
+            <path d="M0,96L48,80C96,64,192,32,288,37.3C384,43,480,85,576,96C672,107,768,85,864,69.3C960,53,1056,43,1152,48L1200,53V120H1152C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120H0V96Z" fill="currentColor" className="text-slate-50" />
           </svg>
         </div>
       </section>
@@ -133,29 +96,69 @@ const JobApplicationAgentsBlog = () => {
             </div>
             
             <div className="grid md:grid-cols-2 gap-6">
-              {[
-                { title: "What Are Job Application Agents?", icon: Bot, section: "introduction" },
-                { title: "The Current Job Market Reality", icon: TrendingUp, section: "market-reality" },
-                { title: "How Job Application Agents Work", icon: Zap, section: "how-they-work" },
-                { title: "Types of Application Agents", icon: Target, section: "types" },
-                { title: "Setting Up Your First Agent", icon: Rocket, section: "setup" },
-                { title: "Optimizing Your Profile", icon: Star, section: "optimization" },
-                { title: "Advanced Automation Strategies", icon: BarChart3, section: "automation" },
-                { title: "The Pros: Why They Work", icon: CheckCircle, section: "pros" },
-                { title: "The Cons: What to Watch Out For", icon: XCircle, section: "cons" },
-                { title: "Common Mistakes to Avoid", icon: Shield, section: "mistakes" },
-                { title: "Standing Out from Other Applicants", icon: Lightbulb, section: "standing-out" },
-                { title: "AI and the Future of Job Hunting", icon: Bot, section: "ai-future" },
-                { title: "Success Stories and Case Studies", icon: Users, section: "success-stories" },
-                { title: "Tools and Platforms Comparison", icon: BarChart3, section: "tools" },
-                { title: "Your Next Steps", icon: ArrowRight, section: "next-steps" }
-              ].map((item, index) => (
-                <Card 
-                  key={index}
-                  className={`group cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] ${isVisible['table-of-contents'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                  onClick={() => scrollToSection(item.section)}
-                >
+              {[{
+              title: "What Are Job Application Agents?",
+              icon: Bot,
+              section: "introduction"
+            }, {
+              title: "The Current Job Market Reality",
+              icon: TrendingUp,
+              section: "market-reality"
+            }, {
+              title: "How Job Application Agents Work",
+              icon: Zap,
+              section: "how-they-work"
+            }, {
+              title: "Types of Application Agents",
+              icon: Target,
+              section: "types"
+            }, {
+              title: "Setting Up Your First Agent",
+              icon: Rocket,
+              section: "setup"
+            }, {
+              title: "Optimizing Your Profile",
+              icon: Star,
+              section: "optimization"
+            }, {
+              title: "Advanced Automation Strategies",
+              icon: BarChart3,
+              section: "automation"
+            }, {
+              title: "The Pros: Why They Work",
+              icon: CheckCircle,
+              section: "pros"
+            }, {
+              title: "The Cons: What to Watch Out For",
+              icon: XCircle,
+              section: "cons"
+            }, {
+              title: "Common Mistakes to Avoid",
+              icon: Shield,
+              section: "mistakes"
+            }, {
+              title: "Standing Out from Other Applicants",
+              icon: Lightbulb,
+              section: "standing-out"
+            }, {
+              title: "AI and the Future of Job Hunting",
+              icon: Bot,
+              section: "ai-future"
+            }, {
+              title: "Success Stories and Case Studies",
+              icon: Users,
+              section: "success-stories"
+            }, {
+              title: "Tools and Platforms Comparison",
+              icon: BarChart3,
+              section: "tools"
+            }, {
+              title: "Your Next Steps",
+              icon: ArrowRight,
+              section: "next-steps"
+            }].map((item, index) => <Card key={index} className={`group cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] ${isVisible['table-of-contents'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+              transitionDelay: `${index * 100}ms`
+            }} onClick={() => scrollToSection(item.section)}>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg group-hover:from-indigo-200 group-hover:to-purple-200 transition-all duration-300">
@@ -170,8 +173,7 @@ const JobApplicationAgentsBlog = () => {
                       <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-600 transform group-hover:translate-x-1 transition-all duration-300" />
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </div>
@@ -306,37 +308,31 @@ const JobApplicationAgentsBlog = () => {
                 </p>
                 
                 <div className="space-y-6 mb-12">
-                  {[
-                    {
-                      step: 1,
-                      title: "Job Discovery & Scanning",
-                      description: "The agent continuously monitors job boards like LinkedIn, Indeed, and company career pages, scanning for positions that match your criteria.",
-                      icon: Eye,
-                      color: "from-blue-500 to-blue-600"
-                    },
-                    {
-                      step: 2,
-                      title: "Intelligent Filtering",
-                      description: "Using AI, it analyzes job descriptions against your profile, filtering out irrelevant positions and prioritizing the best matches.",
-                      icon: Target,
-                      color: "from-purple-500 to-purple-600"
-                    },
-                    {
-                      step: 3,
-                      title: "Application Customization",
-                      description: "For each relevant job, the agent tailors your resume and cover letter, highlighting the most relevant skills and experiences.",
-                      icon: Star,
-                      color: "from-green-500 to-green-600"
-                    },
-                    {
-                      step: 4,
-                      title: "Automated Submission",
-                      description: "The agent fills out application forms and submits your materials, handling everything from basic info to complex questionnaires.",
-                      icon: Rocket,
-                      color: "from-orange-500 to-orange-600"
-                    }
-                  ].map((item, index) => (
-                    <div key={index} className="flex gap-6 group">
+                  {[{
+                  step: 1,
+                  title: "Job Discovery & Scanning",
+                  description: "The agent continuously monitors job boards like LinkedIn, Indeed, and company career pages, scanning for positions that match your criteria.",
+                  icon: Eye,
+                  color: "from-blue-500 to-blue-600"
+                }, {
+                  step: 2,
+                  title: "Intelligent Filtering",
+                  description: "Using AI, it analyzes job descriptions against your profile, filtering out irrelevant positions and prioritizing the best matches.",
+                  icon: Target,
+                  color: "from-purple-500 to-purple-600"
+                }, {
+                  step: 3,
+                  title: "Application Customization",
+                  description: "For each relevant job, the agent tailors your resume and cover letter, highlighting the most relevant skills and experiences.",
+                  icon: Star,
+                  color: "from-green-500 to-green-600"
+                }, {
+                  step: 4,
+                  title: "Automated Submission",
+                  description: "The agent fills out application forms and submits your materials, handling everything from basic info to complex questionnaires.",
+                  icon: Rocket,
+                  color: "from-orange-500 to-orange-600"
+                }].map((item, index) => <div key={index} className="flex gap-6 group">
                       <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-all duration-300`}>
                         {item.step}
                       </div>
@@ -348,8 +344,7 @@ const JobApplicationAgentsBlog = () => {
                           {item.description}
                         </p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
                 
                 <div className="bg-gradient-to-r from-green-100 to-teal-100 border border-green-200 p-6 rounded-lg transform hover:scale-[1.02] transition-all duration-300">
@@ -388,41 +383,35 @@ const JobApplicationAgentsBlog = () => {
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-8 mb-12">
-                  {[
-                    {
-                      type: "Basic Automation Tools",
-                      description: "Simple bots that auto-fill application forms using saved information. Great for high-volume applications but limited customization.",
-                      pros: ["Quick setup", "Low cost", "High application volume"],
-                      cons: ["Generic applications", "Limited targeting", "Higher rejection rates"],
-                      bestFor: "Entry-level positions, volume-based strategies",
-                      color: "from-blue-400 to-blue-600"
-                    },
-                    {
-                      type: "AI-Powered Smart Agents",
-                      description: "Advanced systems that use machine learning to customize applications, analyze job requirements, and optimize success rates.",
-                      pros: ["Intelligent matching", "Customized applications", "Better success rates"],
-                      cons: ["Higher cost", "Steeper learning curve", "Setup complexity"],
-                      bestFor: "Mid to senior-level professionals, quality-focused approach",
-                      color: "from-purple-400 to-purple-600"
-                    },
-                    {
-                      type: "Platform-Specific Bots",
-                      description: "Specialized tools designed for specific job boards like LinkedIn, Indeed, or AngelList with deep platform integration.",
-                      pros: ["Platform optimization", "Advanced features", "Higher compatibility"],
-                      cons: ["Limited to one platform", "Platform dependency", "Feature restrictions"],
-                      bestFor: "Platform-heavy strategies, niche job markets",
-                      color: "from-green-400 to-green-600"
-                    },
-                    {
-                      type: "Custom-Built Solutions",
-                      description: "Tailored agents built specifically for your industry, role, or company targets with maximum personalization.",
-                      pros: ["Maximum customization", "Industry-specific", "Unique advantages"],
-                      cons: ["High cost", "Technical expertise needed", "Maintenance required"],
-                      bestFor: "Executives, niche industries, specific company targeting",
-                      color: "from-orange-400 to-orange-600"
-                    }
-                  ].map((agent, index) => (
-                    <Card key={index} className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                  {[{
+                  type: "Basic Automation Tools",
+                  description: "Simple bots that auto-fill application forms using saved information. Great for high-volume applications but limited customization.",
+                  pros: ["Quick setup", "Low cost", "High application volume"],
+                  cons: ["Generic applications", "Limited targeting", "Higher rejection rates"],
+                  bestFor: "Entry-level positions, volume-based strategies",
+                  color: "from-blue-400 to-blue-600"
+                }, {
+                  type: "AI-Powered Smart Agents",
+                  description: "Advanced systems that use machine learning to customize applications, analyze job requirements, and optimize success rates.",
+                  pros: ["Intelligent matching", "Customized applications", "Better success rates"],
+                  cons: ["Higher cost", "Steeper learning curve", "Setup complexity"],
+                  bestFor: "Mid to senior-level professionals, quality-focused approach",
+                  color: "from-purple-400 to-purple-600"
+                }, {
+                  type: "Platform-Specific Bots",
+                  description: "Specialized tools designed for specific job boards like LinkedIn, Indeed, or AngelList with deep platform integration.",
+                  pros: ["Platform optimization", "Advanced features", "Higher compatibility"],
+                  cons: ["Limited to one platform", "Platform dependency", "Feature restrictions"],
+                  bestFor: "Platform-heavy strategies, niche job markets",
+                  color: "from-green-400 to-green-600"
+                }, {
+                  type: "Custom-Built Solutions",
+                  description: "Tailored agents built specifically for your industry, role, or company targets with maximum personalization.",
+                  pros: ["Maximum customization", "Industry-specific", "Unique advantages"],
+                  cons: ["High cost", "Technical expertise needed", "Maintenance required"],
+                  bestFor: "Executives, niche industries, specific company targeting",
+                  color: "from-orange-400 to-orange-600"
+                }].map((agent, index) => <Card key={index} className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                       <CardHeader>
                         <div className={`w-full h-2 bg-gradient-to-r ${agent.color} rounded-t-lg`}></div>
                         <CardTitle className="text-xl text-gray-900 group-hover:text-purple-600 transition-colors">
@@ -439,9 +428,7 @@ const JobApplicationAgentsBlog = () => {
                               Pros
                             </h4>
                             <ul className="text-sm text-green-600 space-y-1">
-                              {agent.pros.map((pro, i) => (
-                                <li key={i}>• {pro}</li>
-                              ))}
+                              {agent.pros.map((pro, i) => <li key={i}>• {pro}</li>)}
                             </ul>
                           </div>
                           
@@ -451,9 +438,7 @@ const JobApplicationAgentsBlog = () => {
                               Cons
                             </h4>
                             <ul className="text-sm text-red-600 space-y-1">
-                              {agent.cons.map((con, i) => (
-                                <li key={i}>• {con}</li>
-                              ))}
+                              {agent.cons.map((con, i) => <li key={i}>• {con}</li>)}
                             </ul>
                           </div>
                         </div>
@@ -462,8 +447,7 @@ const JobApplicationAgentsBlog = () => {
                           <p className="text-sm font-medium text-gray-900">Best for: <span className="font-normal text-gray-700">{agent.bestFor}</span></p>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </div>
             </div>
@@ -496,27 +480,22 @@ const JobApplicationAgentsBlog = () => {
               </p>
               
               <div className="grid md:grid-cols-3 gap-8 mb-12">
-                {[
-                  {
-                    step: "Week 1",
-                    title: "Choose & Setup",
-                    description: "Select the right agent type for your needs and get your first automation running",
-                    icon: Target
-                  },
-                  {
-                    step: "Week 2-3",
-                    title: "Optimize & Scale",
-                    description: "Fine-tune your targeting, customize templates, and increase application volume",
-                    icon: BarChart3
-                  },
-                  {
-                    step: "Week 4+",
-                    title: "Interview & Land",
-                    description: "Focus on interview preparation while your agent continues working in the background",
-                    icon: CheckCircle
-                  }
-                ].map((item, index) => (
-                  <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 text-white group hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                {[{
+                step: "Week 1",
+                title: "Choose & Setup",
+                description: "Select the right agent type for your needs and get your first automation running",
+                icon: Target
+              }, {
+                step: "Week 2-3",
+                title: "Optimize & Scale",
+                description: "Fine-tune your targeting, customize templates, and increase application volume",
+                icon: BarChart3
+              }, {
+                step: "Week 4+",
+                title: "Interview & Land",
+                description: "Focus on interview preparation while your agent continues working in the background",
+                icon: CheckCircle
+              }].map((item, index) => <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 text-white group hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
                     <CardContent className="p-6 text-center">
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4 group-hover:bg-white/30 transition-all duration-300">
                         <item.icon className="w-8 h-8" />
@@ -525,8 +504,7 @@ const JobApplicationAgentsBlog = () => {
                       <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                       <p className="text-blue-100 leading-relaxed">{item.description}</p>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-8 mb-12">
@@ -558,15 +536,13 @@ const JobApplicationAgentsBlog = () => {
 
       {/* Scroll to Top Button */}
       <div className="fixed bottom-8 right-8 z-50">
-        <Button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
-        >
+        <Button onClick={() => window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })} className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300">
           <ChevronDown className="w-6 h-6 rotate-180" />
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default JobApplicationAgentsBlog;
